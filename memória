@@ -1,5 +1,5 @@
 module memoria_RAM
-input RD, OE, CS,
+input tx, ty, tz,
 input clock
 input [3:0] dado_in
 input [1:0] endereco
@@ -9,12 +9,12 @@ reg [9:0] memoria[4];
 
 always@(posedge clock) begin
 
-//
-if(CS && !RD) memoria[endereco]=dado_in;
-//
-else if(CS && RD && OE) dado_out=memoria[endereco];
-//
-else if(!OE && !CS) dado_out=7'bz;
+  //
+  if(tx && !ty) memoria[endereco]=dado_in;
+  //
+  else if(tx && ty && tz) dado_out=memoria[endereco];
+  //
+  else if(!tz && !tx) dado_out=7'bz;
 
 end
 end module
